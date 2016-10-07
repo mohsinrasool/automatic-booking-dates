@@ -144,8 +144,18 @@ final class Automatic_Booking_Dates {
 		register_activation_hook( __FILE__, array( $this, 'install' ) );
 
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		add_action('admin_head', array( $this,'wpds_custom_admin_post_css') );
 	} // End __construct()
 
+
+	function wpds_custom_admin_post_css() {
+
+	    global $post_type;
+
+	    if ($post_type == 'date_list') {
+	        echo "<style>.updated.notice.notice-success a {display:none;}</style>";
+	    }
+	}
 	/**
 	 * Main Automatic_Booking_Dates Instance
 	 *
